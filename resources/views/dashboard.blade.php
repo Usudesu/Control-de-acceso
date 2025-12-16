@@ -27,6 +27,12 @@
                 {{ __("Este es tu dashboard")}}
             </p>
 
+            <img 
+                    src="{{ asset('images/pecas.jfif') }}"
+                    alt="Imagen del dashboard"
+                    class="w-80 mx-auto rounded-lg"
+                >
+
     </div>
 
 
