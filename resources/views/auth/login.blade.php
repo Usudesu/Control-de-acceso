@@ -23,6 +23,15 @@
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+        <div>
+            <a 
+                href=" /google-auth/redirect"
+                class="inline block px-5 py-1.5 dark:text border border-transparent"
+            >
+                Google
+            </a>
+        </div>
+
 
         <!-- Remember Me -->
         <div class="block mt-4">

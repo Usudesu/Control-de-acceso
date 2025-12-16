@@ -3,6 +3,34 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use Laravel\Socialite\Socialite;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+
+Route::get('/google-auth/callback' , function() {
+    $user_google = Socialite::driver('google')
+       // ->setHttpClient (new \GuzzleHttp\Client(['verify' => false]))
+        ->user();
+    $user = User::updateOrCreate(
+        attributes: [
+            'google_id' => $user_google ->id,
+            
+        ],
+
+        values: [
+            'name' => $user_google->name,
+            'email' => $user_google -> email,
+
+        ]);
+
+    Auth::login($user);
+    return redirect('/dashboard');
+
+
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +46,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/google-auth/redirect' , function() {
+    return Socialite::driver('google')->redirect();
+});
+
+
